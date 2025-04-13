@@ -44,28 +44,31 @@ const ContactForms = () => {
     setSubmitting(true);
     
     try {
+      // Generate a UUID for the profile
+      const profileId = crypto.randomUUID();
+      
       // First create a profile
-      const { data: profileData, error: profileError } = await supabase
+      const { error: profileError } = await supabase
         .from('profiles')
         .insert([
           {
+            id: profileId,
             email: creatorFormState.email,
             full_name: creatorFormState.name,
             user_type: 'creator'
           }
-        ])
-        .select()
-        .single();
+        ]);
 
       if (profileError) throw profileError;
 
       // Then create the creator entry
-      const { data: creatorData, error: creatorError } = await supabase
+      const { error: creatorError } = await supabase
         .from('creators')
         .insert([
           {
+            id: crypto.randomUUID(),
             name: creatorFormState.name,
-            user_id: profileData.id,
+            user_id: profileId,
             bio: creatorFormState.message,
             specialty: creatorFormState.niche,
             social_links: {
@@ -73,9 +76,7 @@ const ContactForms = () => {
               handle: creatorFormState.socialHandle
             }
           }
-        ])
-        .select()
-        .single();
+        ]);
 
       if (creatorError) throw creatorError;
 
@@ -115,35 +116,36 @@ const ContactForms = () => {
     setSubmitting(true);
     
     try {
+      // Generate a UUID for the profile
+      const profileId = crypto.randomUUID();
+      
       // First create a profile
-      const { data: profileData, error: profileError } = await supabase
+      const { error: profileError } = await supabase
         .from('profiles')
         .insert([
           {
+            id: profileId,
             email: brandFormState.email,
             full_name: brandFormState.name,
             user_type: 'brand'
           }
-        ])
-        .select()
-        .single();
+        ]);
 
       if (profileError) throw profileError;
 
       // Then create the brand entry
-      const { data: brandData, error: brandError } = await supabase
+      const { error: brandError } = await supabase
         .from('brands')
         .insert([
           {
+            id: crypto.randomUUID(),
             company_name: brandFormState.companyName,
             contact_email: brandFormState.email,
-            user_id: profileData.id,
+            user_id: profileId,
             industry: brandFormState.industry,
             description: brandFormState.message
           }
-        ])
-        .select()
-        .single();
+        ]);
 
       if (brandError) throw brandError;
 
