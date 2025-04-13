@@ -7,6 +7,7 @@ import ForCreators from '@/components/ForCreators';
 import ForBrands from '@/components/ForBrands';
 import Testimonials from '@/components/Testimonials';
 import Portfolio from '@/components/Portfolio';
+import Team from '@/components/Team';
 import ContactForms from '@/components/ContactForms';
 import Footer from '@/components/Footer';
 
@@ -21,6 +22,7 @@ const Index = () => {
         <ForBrands />
         <Testimonials />
         <Portfolio />
+        <Team />
         <ContactForms />
       </main>
       <Footer />
