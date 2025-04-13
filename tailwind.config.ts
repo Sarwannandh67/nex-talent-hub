@@ -63,16 +63,16 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// CreatorNex custom colors
+				// CreatorNex custom colors - updated to modern colors
 				creatorPurple: {
-					DEFAULT: '#8B5CF6',
-					light: '#D6BCFA',
-					dark: '#6E59A5'
+					DEFAULT: '#7C5DFA',
+					light: '#C3B4FD',
+					dark: '#4E36BC'
 				},
 				creatorBlue: {
-					DEFAULT: '#0EA5E9',
-					light: '#D3E4FD',
-					dark: '#1A1F2C'
+					DEFAULT: '#3B82F6',
+					light: '#BFDBFE',
+					dark: '#1E40AF'
 				}
 			},
 			borderRadius: {
@@ -115,8 +115,8 @@ export default {
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-				'creator-gradient': 'linear-gradient(90deg, hsla(265, 75%, 84%, 1) 0%, hsla(275, 50%, 51%, 1) 100%)',
-				'brand-gradient': 'linear-gradient(90deg, hsla(221, 45%, 73%, 1) 0%, hsla(220, 78%, 29%, 1) 100%)',
+				'creator-gradient': 'linear-gradient(90deg, hsla(250, 75%, 85%, 1) 0%, hsla(250, 83%, 63%, 1) 100%)',
+				'brand-gradient': 'linear-gradient(90deg, hsla(210, 90%, 80%, 1) 0%, hsla(210, 90%, 54%, 1) 100%)',
 			},
 			fontFamily: {
 				'poppins': ['Poppins', 'sans-serif'],
