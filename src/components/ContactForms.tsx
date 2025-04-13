@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -10,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useToast } from '@/components/ui/use-toast';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { CheckCircle2 } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 const ContactForms = () => {
   const { toast } = useToast();
@@ -39,16 +39,49 @@ const ContactForms = () => {
 
   const [submitting, setSubmitting] = useState(false);
 
-  const handleCreatorSubmit = (e: React.FormEvent) => {
+  const handleCreatorSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
     
-    // Simulate API call
-    setTimeout(() => {
-      setSubmitting(false);
+    try {
+      // First create a profile
+      const { data: profileData, error: profileError } = await supabase
+        .from('profiles')
+        .insert([
+          {
+            email: creatorFormState.email,
+            full_name: creatorFormState.name,
+            user_type: 'creator'
+          }
+        ])
+        .select()
+        .single();
+
+      if (profileError) throw profileError;
+
+      // Then create the creator entry
+      const { data: creatorData, error: creatorError } = await supabase
+        .from('creators')
+        .insert([
+          {
+            name: creatorFormState.name,
+            user_id: profileData.id,
+            bio: creatorFormState.message,
+            specialty: creatorFormState.niche,
+            social_links: {
+              platform: creatorFormState.socialPlatform,
+              handle: creatorFormState.socialHandle
+            }
+          }
+        ])
+        .select()
+        .single();
+
+      if (creatorError) throw creatorError;
+
       toast({
-        title: "Form submitted successfully!",
-        description: "We'll get back to you within 24-48 hours.",
+        title: "Application submitted successfully!",
+        description: "We'll review your application and get back to you within 24-48 hours.",
         duration: 5000,
       });
       
@@ -64,18 +97,58 @@ const ContactForms = () => {
         services: [],
         message: ''
       });
-    }, 1500);
+    } catch (error) {
+      console.error('Error submitting creator form:', error);
+      toast({
+        title: "Error submitting application",
+        description: "Please try again later or contact support if the problem persists.",
+        variant: "destructive",
+        duration: 5000,
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
-  const handleBrandSubmit = (e: React.FormEvent) => {
+  const handleBrandSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
     
-    // Simulate API call
-    setTimeout(() => {
-      setSubmitting(false);
+    try {
+      // First create a profile
+      const { data: profileData, error: profileError } = await supabase
+        .from('profiles')
+        .insert([
+          {
+            email: brandFormState.email,
+            full_name: brandFormState.name,
+            user_type: 'brand'
+          }
+        ])
+        .select()
+        .single();
+
+      if (profileError) throw profileError;
+
+      // Then create the brand entry
+      const { data: brandData, error: brandError } = await supabase
+        .from('brands')
+        .insert([
+          {
+            company_name: brandFormState.companyName,
+            contact_email: brandFormState.email,
+            user_id: profileData.id,
+            industry: brandFormState.industry,
+            description: brandFormState.message
+          }
+        ])
+        .select()
+        .single();
+
+      if (brandError) throw brandError;
+
       toast({
-        title: "Form submitted successfully!",
+        title: "Inquiry submitted successfully!",
         description: "Our team will contact you shortly to discuss your needs.",
         duration: 5000,
       });
@@ -92,7 +165,17 @@ const ContactForms = () => {
         timeframe: '',
         message: ''
       });
-    }, 1500);
+    } catch (error) {
+      console.error('Error submitting brand form:', error);
+      toast({
+        title: "Error submitting inquiry",
+        description: "Please try again later or contact support if the problem persists.",
+        variant: "destructive",
+        duration: 5000,
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
