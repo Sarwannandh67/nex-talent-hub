@@ -115,7 +115,7 @@ export default {
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-				'creator-gradient': 'linear-gradient(90deg, hsla(277, 75%, 84%, 1) 0%, hsla(297, 50%, 51%, 1) 100%)',
+				'creator-gradient': 'linear-gradient(90deg, hsla(265, 75%, 84%, 1) 0%, hsla(275, 50%, 51%, 1) 100%)',
 				'brand-gradient': 'linear-gradient(90deg, hsla(221, 45%, 73%, 1) 0%, hsla(220, 78%, 29%, 1) 100%)',
 			},
 			fontFamily: {
