@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,17 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// CreatorNex custom colors
+				creatorPurple: {
+					DEFAULT: '#8B5CF6',
+					light: '#D6BCFA',
+					dark: '#6E59A5'
+				},
+				creatorBlue: {
+					DEFAULT: '#0EA5E9',
+					light: '#D3E4FD',
+					dark: '#1A1F2C'
 				}
 			},
 			borderRadius: {
@@ -84,11 +96,34 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				// Custom animation keyframes
+				'float': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' },
+				},
+				'pulse-soft': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.8' },
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'float': 'float 6s ease-in-out infinite',
+				'pulse-soft': 'pulse-soft 3s ease-in-out infinite'
+			},
+			backgroundImage: {
+				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+				'creator-gradient': 'linear-gradient(90deg, hsla(277, 75%, 84%, 1) 0%, hsla(297, 50%, 51%, 1) 100%)',
+				'brand-gradient': 'linear-gradient(90deg, hsla(221, 45%, 73%, 1) 0%, hsla(220, 78%, 29%, 1) 100%)',
+			},
+			fontFamily: {
+				'poppins': ['Poppins', 'sans-serif'],
+				'montserrat': ['Montserrat', 'sans-serif']
+			},
+			backdropBlur: {
+				'xs': '2px',
 			}
 		}
 	},
